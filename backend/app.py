@@ -128,18 +128,19 @@ def get_gemini_response(input_data, prompt):
 
 
 
-def gemini_suggestions(predicted_label_skin_condition, predicted_label_ageing_condition):
+def gemini_suggestions(predicted_label_skin_condition, predicted_label_ageing_condition, skin_analysis_result):
     
     try:
-        input_data = f"The detected skin conditions are: {predicted_label_skin_condition} (Skin Disease), {predicted_label_ageing_condition} (Skin Condition)."
+        input_data = f"The detected skin conditions are: {predicted_label_skin_condition} (Skin Disease), {predicted_label_ageing_condition} (Skin Condition). The patient has filled the given survey form: {skin_analysis_result}."
 
         prompt = (
-            "Provide a detailed skincare recommendation and lifestyle tips based on the detected skin conditions in JSON format. "
+            "You are a renowned Dermatologist in India. Based on the skin survey form and disease conditions predicted along with skin symptom of ageing, provide a detailed skincare recommendation and lifestyle tips in JSON format. "
             "The response should include the following structured data: "
             "1. recommendations.coreIngredients: A list of core ingredients to include in skin care that would help treat the current skin condition (e.g., 'Folic Acid', 'Salicylic Acid', 'Retinol'). "
             "2. recommendations.food: A list of food items that promote healthy skin (e.g., 'Avocado', 'Blueberries'). "
             "3. recommendations.suggestedProducts: A list of simple skincare products that can be used for the condition and disease (e.g., 'Gentle Cleanser', 'Moisturizer'). "
             "4. recommendations.lifestyleTips: A list of 5 lifestyle changes or tips to cure the skin disease and reduce effects of condition (e.g., 'Drink plenty of water', 'Get enough sleep'). "
+            "5. summary: A comprehensive summary analyzing the survey form data and predicted results to help patient understand his overall mellowed down condition and skin type to take care of. DO NOT REPEAT THE RECOOMENDATIONS. Write something different like introducing the patient to his skin type. Be to the point. No introductory line."
             "Return the data in the following structured format in JSON. Make sure each field has at least 3 values."
             "DON'T GIVE ANY ADDITIONAL INFORMATION OTHER THAN JSON OBJECT."
         )
@@ -166,6 +167,8 @@ def predict():
         return jsonify({"error": "No image part"}), 400
 
     file = request.files['image']
+    skin_analysis_result = request.form.get('skin_analysis_result')
+        
     if file.filename == '':
         return jsonify({"error": "No selected file"}), 400
 
@@ -178,7 +181,7 @@ def predict():
         predicted_label_skin_condition = predicted_result["disease_prediction"]
         predicted_label_ageing_condition = predicted_result["ageing_prediction"]
 
-        result = gemini_suggestions(predicted_label_skin_condition, predicted_label_ageing_condition)
+        result = gemini_suggestions(predicted_label_skin_condition, predicted_label_ageing_condition, skin_analysis_result)
 
         return jsonify(result)
 
