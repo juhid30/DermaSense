@@ -13,7 +13,7 @@ function HomePage() {
       const yPercent = (clientY / innerHeight) * 100;
 
       if (backgroundRef.current) {
-        backgroundRef.current.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #e6ccb2, #ddb892, #b08968)`;
+        backgroundRef.current.style.background = `radial-gradient(circle at ${xPercent}% ${yPercent}%, #e6ccb2, #829bab, #728394)`;
       }
     };
 
@@ -22,26 +22,45 @@ function HomePage() {
   }, []);
 
   return (
-    <div
+    <div 
+      className="min-h-screen bg-gradient-to-b from-[#c0b3a5] to-[#829bab] py-12 px-4 sm:px-6 flex items-center justify-center"
       ref={backgroundRef}
-      className="flex flex-col items-center justify-center h-screen w-screen transition-all duration-300"
-      style={{
-        background:
-          "radial-gradient(circle at center, #e6ccb2, #ddb892, #b08968)",
-      }}
     >
-      <h1 className="text-5xl md:text-7xl font-serif italic font-semibold text-stone-800 drop-shadow-md mb-8 tracking-tight">
-        Derma<span className="italic font-light">Sense</span>
-      </h1>
-      <p className="text-xl text-stone-600 mb-12 max-w-2xl text-center px-4">
-        Your personalized skin care assistant powered by AI
-      </p>
-      <button
-        onClick={() => navigate("/quiz")}
-        className="border-2 border-amber-700 text-amber-700 hover:bg-amber-700 hover:text-white font-medium py-3 px-16 rounded-full text-lg transition-all duration-300 transform hover:scale-105 w-64"
-      >
-        Take Quiz
-      </button>
+      <div className="max-w-6xl w-full mx-auto bg-[#f5f3f0] rounded-2xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+        {/* Left side with background image */}
+        <div className="w-full md:w-1/2 relative h-72 md:h-auto overflow-hidden">
+          <img 
+            src="/face.jpg" 
+            alt="Woman applying skincare" 
+            className="absolute inset-0 w-full h-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#1e1b19]/30 to-transparent"></div>
+        </div>
+        
+        {/* Right side with content */}
+        <div className="w-full md:w-1/2 p-8 md:p-12 flex flex-col justify-center">
+          <h1 className="text-4xl md:text-5xl font-light text-[#1e1b19] mb-6 tracking-wider">
+            DermaSense
+          </h1>
+          
+          <p className="text-lg md:text-xl text-[#728394] mb-10 font-light">
+            Your personalized skin care assistant powered by AI
+          </p>
+          
+          <button
+            onClick={() => navigate("/quiz")}
+            className="w-full bg-[#829bab] hover:bg-[#728394] text-white font-light py-5 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 uppercase tracking-wider text-lg"
+          >
+            Take Quiz
+          </button>
+          
+          <div className="mt-8 border-t border-[#c0b3a5] pt-6">
+            <p className="text-sm text-[#6d4f3e] font-light">
+              Discover your personalized skincare routine in just a few minutes
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }
