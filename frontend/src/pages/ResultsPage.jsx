@@ -9,7 +9,7 @@ function ResultsPage() {
 
   // Get current date and time for timestamping
   const currentDate = new Date().toLocaleString();
-
+  console.log(location.state.results);
   // Get any passed data from navigation (for future backend integration)
   const resultsData = location.state?.results || null;
   if (!resultsData) {
@@ -129,7 +129,9 @@ function ResultsPage() {
             {/* Prediction Results */}
             <section>
               <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-5 flex items-center">
-                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">🧪</span>
+                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                  🧪
+                </span>
                 Prediction Results
               </h3>
               <div className="p-6 rounded-2xl border border-[#c0b3a5] shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-[#e1d5c4] to-white">
@@ -139,7 +141,7 @@ function ResultsPage() {
                       Detected Condition:
                     </p>
                     <p className="text-[#1e1b19] text-xl font-serif">
-                      {resultsData.predicted_label_disease}
+                      Acne: {resultsData.predicted_label_disease.severity}
                     </p>
                   </div>
 
@@ -158,7 +160,9 @@ function ResultsPage() {
             {/* AI Response */}
             <section>
               <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-5 flex items-center">
-                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">🤖</span>
+                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                  🤖
+                </span>
                 Analysis Summary
               </h3>
               <div className="p-6 rounded-2xl border border-[#c0b3a5] shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-br from-white to-[#e1d5c4]">
@@ -172,7 +176,9 @@ function ResultsPage() {
             {/* Recommended Ingredients */}
             <section>
               <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-5 flex items-center">
-                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">🌿</span>
+                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                  🌿
+                </span>
                 Recommended Active Ingredients
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -194,7 +200,9 @@ function ResultsPage() {
             {/* Recommended Foods */}
             <section>
               <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-5 flex items-center">
-                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">🍎</span>
+                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                  🍎
+                </span>
                 Recommended Foods
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
@@ -216,13 +224,18 @@ function ResultsPage() {
             {/* Lifestyle Tips */}
             <section>
               <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-5 flex items-center">
-                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">💡</span>
+                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                  💡
+                </span>
                 Lifestyle Tips
               </h3>
               <div className="space-y-4 bg-white rounded-2xl p-6 border border-[#c0b3a5] shadow-lg">
                 {resultsData.gemini_response.recommendations.lifestyleTips.map(
                   (tip, idx) => (
-                    <div key={idx} className="text-[#1e1b19] p-4 border-l-4 border-[#728394] bg-[#e1d5c4] bg-opacity-30 rounded-r-lg font-serif">
+                    <div
+                      key={idx}
+                      className="text-[#1e1b19] p-4 border-l-4 border-[#728394] bg-[#e1d5c4] bg-opacity-30 rounded-r-lg font-serif"
+                    >
                       {tip}
                     </div>
                   )
@@ -233,13 +246,18 @@ function ResultsPage() {
             {/* Suggested Products */}
             <section>
               <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-5 flex items-center">
-                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">🧴</span>
+                <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                  🧴
+                </span>
                 Suggested Products
               </h3>
               <div className="space-y-4 bg-white rounded-2xl p-6 border border-[#c0b3a5] shadow-lg">
                 {resultsData.gemini_response.recommendations.suggestedProducts.map(
                   (product, idx) => (
-                    <div key={idx} className="text-[#1e1b19] p-4 border-l-4 border-[#c0b3a5] bg-[#e1d5c4] bg-opacity-20 rounded-r-lg font-serif">
+                    <div
+                      key={idx}
+                      className="text-[#1e1b19] p-4 border-l-4 border-[#c0b3a5] bg-[#e1d5c4] bg-opacity-20 rounded-r-lg font-serif"
+                    >
                       {product}
                     </div>
                   )
@@ -290,7 +308,7 @@ function ResultsPage() {
             </div>
           </div>
         </div>
-        
+
         <div className="mt-8 text-center text-[#1e1b19] opacity-70 font-serif">
           © 2025 Skin Analysis System • All Rights Reserved
         </div>

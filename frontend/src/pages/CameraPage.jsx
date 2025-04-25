@@ -80,7 +80,7 @@ function CameraPage() {
       formData.append("skinAnalysisResults", skinAnalysisResults);
 
       const response = await axios.post(
-        "http://127.0.0.1:5000/predict",
+        "http://127.0.0.1:5000/predict-face",
         formData,
         {
           headers: {
@@ -250,7 +250,9 @@ function CameraPage() {
 
           <div className="bg-gradient-to-b from-white to-[#e1d5c4] rounded-2xl p-8 flex flex-col items-center transform transition-all duration-300 hover:shadow-xl border border-[#c0b3a5]">
             <h3 className="text-2xl font-serif font-semibold text-[#1e1b19] mb-6 tracking-wide flex items-center">
-              <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">📷</span>
+              <span className="mr-3 bg-[#728394] text-white p-2 rounded-full">
+                📷
+              </span>
               Your Image
             </h3>
             {images.length === 0 ? (
@@ -359,14 +361,15 @@ function CameraPage() {
             )}
           </div>
         </div>
-        
+
         <div className="bg-[#e1d5c4] bg-opacity-50 py-6 px-10 text-center border-t border-[#c0b3a5]">
           <p className="text-[#6d4f3e] font-serif">
-            For best results, ensure good lighting and a clear view of the skin area you wish to analyze.
+            For best results, ensure good lighting and a clear view of the skin
+            area you wish to analyze.
           </p>
         </div>
       </div>
-      
+
       <div className="mt-8 text-center text-[#1e1b19] opacity-70 font-serif absolute bottom-4 left-0 right-0">
         © 2025 Skin Analysis System • All Rights Reserved
       </div>

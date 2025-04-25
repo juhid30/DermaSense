@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function DashboardPage() {
   const navigate = useNavigate();
@@ -7,6 +7,7 @@ function DashboardPage() {
   const [analysisHistory, setAnalysisHistory] = useState([]);
   const [loading, setLoading] = useState(true);
   const [clearConfirm, setClearConfirm] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     // Fetch skin profile and analysis history from localStorage
@@ -52,11 +53,9 @@ function DashboardPage() {
   };
 
   // Handle clicking on a history item to view full results
-  const viewResult = (resultId) => {
-    // In a real implementation, you might navigate to the results page with this ID
-    // For now we'll just console log it
-    console.log("Viewing result:", resultId);
-    navigate("/results");
+  const viewResult = (result) => {
+    console.log("Viewing result:", result);
+    navigate("/results", { state: { results: result } });
   };
 
   // Clear history
@@ -137,7 +136,7 @@ function DashboardPage() {
                             <p className="font-light text-[#6d4f3e] mb-2 uppercase text-xs tracking-wider">
                               Primary Concerns
                             </p>
-                            <p className="text-[#1e1b19] font-light">
+                            <p className="text-[#1e1b19] text-xl font-light">
                               {skinProfile.skinConcerns &&
                               skinProfile.skinConcerns.length > 0
                                 ? skinProfile.skinConcerns.join(", ")
@@ -336,11 +335,20 @@ function DashboardPage() {
                       <div
                         key={result.id}
                         className="flex justify-between items-center p-5 bg-white border-l-4 border-l-[#829bab] rounded-lg shadow-md hover:shadow-lg transition duration-300 cursor-pointer"
-                        onClick={() => viewResult(result.id)}
+                        onClick={() => viewResult(result)}
                       >
                         <div>
                           <p className="text-[#1e1b19] font-medium text-lg mb-1">
-                            {result.predicted_label_ageing}
+                            <span className="font-semibold">Acne:</span>{" "}
+                            {result.predicted_label_disease.severity}
+                            <span className="mx-2">|</span>
+                            <span className="font-semibold">
+                              Other Symptoms:
+                            </span>{" "}
+                            {result.predicted_label_ageing
+                              .charAt(0)
+                              .toUpperCase() +
+                              result.predicted_label_ageing.slice(1)}
                           </p>
                           <p className="text-[#6d4f3e] font-light">
                             {result.gemini_response.summary}
