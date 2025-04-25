@@ -79,7 +79,7 @@ def predict_image(img):
 
     # Get the predicted label index
     predicted_ageing_class_idx = np.argmax(predictions_ageing, axis=1)
-
+    
     # Map the index to the corresponding label
     predicted_ageing_label = class_labels[predicted_ageing_class_idx[0]]
     
