@@ -65,36 +65,38 @@ function QuizPage() {
 
   if (submitted) {
     return (
-      <div className="flex flex-col items-center justify-center h-screen w-screen bg-gradient-to-r from-almond-400 to-dun-300">
-        {/* Thank You Icon */}
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="h-16 w-16 text-coffee-600 mb-4"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={2}
-            d="M5 13l4 4L19 7"
-          />
-        </svg>
-
-        {/* Thank You Text */}
-        <div className="text-3xl font-semibold text-coffee-600 mb-2 animate-pulse">
-          Thank You!
+      <div className="flex flex-col items-center justify-center h-screen w-screen bg-gradient-to-b from-[#c0b3a5] to-[#829bab]">
+        {/* Thank You Icon with animation */}
+        <div className="bg-[#1e1b19] rounded-full p-6 mb-8 shadow-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-16 w-16 text-[#c0b3a5]"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M5 13l4 4L19 7"
+            />
+          </svg>
         </div>
 
-        <p className="text-xl text-coffee-500 mb-10 animate-pulse">
+        {/* Thank You Text */}
+        <div className="text-4xl font-light text-[#1e1b19] mb-4 tracking-wider">
+          THANK YOU
+        </div>
+
+        <p className="text-xl text-[#1e1b19] mb-12 font-light tracking-wide">
           Your skin profile has been saved successfully.
         </p>
 
         {/* Button */}
         <button
           onClick={() => navigate("/dashboard")}
-          className="bg-coffee-600 hover:bg-coffee-700 text-amber-50 font-normal py-3 px-10 rounded-full text-lg transition-all duration-300 shadow-md"
+          className="bg-[#829bab] hover:bg-[#728394] text-white font-light py-4 px-12 rounded-full text-lg transition-all duration-300 shadow-lg uppercase tracking-wider"
         >
           View Dashboard
         </button>
@@ -103,17 +105,16 @@ function QuizPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-r from-tan-500 via-dun-400 to-almond-500 py-16 px-4 sm:px-6">
-      <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-xl overflow-hidden border border-dun-400 p-6">
-        <div className="bg-coffee-600 py-6 px-8 flex items-center rounded-t-3xl mb-10">
-          <h2 className="text-3xl font-semibold text-white tracking-wide">
-            Skin Profile Quiz
+    <div className="min-h-screen bg-gradient-to-b from-[#c0b3a5] to-[#829bab] py-16 px-4 sm:px-6">
+      <div className="max-w-3xl mx-auto bg-[#f5f3f0] rounded-2xl shadow-xl overflow-hidden">
+        <div className="bg-[#1e1b19] py-6 px-8 flex items-center">
+          <h2 className="text-3xl font-light text-[#c0b3a5] tracking-wider">
+            SKIN PROFILE QUIZ
           </h2>
-          <span className="ml-2 text-dun-200 text-2xl">✧</span>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-12">
-          <div className="space-y-10">
+        <form onSubmit={handleSubmit} className="p-8 space-y-8">
+          <div className="space-y-8">
             <Question
               label="1. What is your skin type?"
               type="radio"
@@ -191,10 +192,10 @@ function QuizPage() {
             />
           </div>
 
-          <div className="mt-6 flex justify-center">
+          <div className="mt-10 flex justify-center">
             <button
               type="submit"
-              className="w-full bg-coffee-600 hover:bg-coffee-700 text-amber-50 font-medium py-4 px-6 rounded-full shadow-lg transition duration-200 transform hover:scale-105"
+              className="w-full bg-[#829bab] hover:bg-[#728394] text-white font-light py-5 px-8 rounded-lg shadow-lg transition duration-300 transform hover:scale-105 uppercase tracking-wider text-lg"
             >
               Submit
             </button>
@@ -207,17 +208,19 @@ function QuizPage() {
 
 function Question({ label, options, selected, onChange, type }) {
   return (
-    <div className="p-6 bg-white rounded-xl shadow-md space-y-6 border border-tan-200">
-      <h3 className="text-lg font-semibold text-coffee-700 mb-4">{label}</h3>
+    <div className="p-6 bg-white rounded-xl shadow-md border-l-4 border-l-[#6d4f3e]">
+      <h3 className="text-lg font-medium text-[#1e1b19] mb-6 pb-2 border-b border-[#c0b3a5]">
+        {label}
+      </h3>
       <div
         className={
           type === "checkbox"
-            ? "grid grid-cols-1 sm:grid-cols-2 gap-6"
+            ? "grid grid-cols-1 sm:grid-cols-2 gap-4"
             : "space-y-4"
         }
       >
         {options.map((option) => (
-          <div key={option} className="flex items-center">
+          <div key={option} className="flex items-center hover:bg-[#e9e5e1] p-2 rounded-lg transition-colors">
             <input
               type={type}
               id={`${label}-${option}`}
@@ -229,12 +232,16 @@ function Question({ label, options, selected, onChange, type }) {
                   : selected === option
               }
               onChange={() => onChange(option)}
-              className="h-5 w-5 text-coffee-500 focus:ring-coffee-400"
+              className={`h-5 w-5 ${
+                type === "checkbox" 
+                  ? "text-[#829bab] focus:ring-[#829bab]" 
+                  : "text-[#6d4f3e] focus:ring-[#6d4f3e]"
+              }`}
               required={type !== "checkbox"}
             />
             <label
               htmlFor={`${label}-${option}`}
-              className="ml-2 text-amber-900"
+              className="ml-3 text-[#1e1b19] font-light"
             >
               {option}
             </label>
