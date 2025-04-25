@@ -177,7 +177,6 @@ def predict():
         
         file = request.files['image']
         skin_analysis_result = request.form.get('skin_analysis_result')
-     
         # If user does not select file, browser also submits an empty part without filename
         if file.filename == '':
             return jsonify({'error': 'No image selected'}), 400
