@@ -6,7 +6,7 @@ import LoadingPage from "./pages/LoadingPage";
 import CameraPage from "./pages/CameraPage.jsx";
 import ResultsPage from "./pages/ResultsPage.jsx";
 import DashboardPage from "./pages/DashboardPage.jsx";
-
+import FaceAgeDetector from "./pages/Faceage.jsx";
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
@@ -32,6 +32,7 @@ function App() {
         <Route path="/dashboard" element={<DashboardPage />} />
         <Route path="/camera" element={<CameraPage />} />
         <Route path="/results" element={<ResultsPage />} />
+        <Route path="/face" element={<FaceAgeDetector/>} />
       </Routes>
     </Router>
   );

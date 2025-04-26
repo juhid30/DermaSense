@@ -19,7 +19,7 @@ function LoadingPage() {
       </div>
       
       {/* Style for custom animation speed */}
-      <style jsx>{`
+      <style jsx="true">{`
         @keyframes spin-slow {
           to {
             transform: rotate(-360deg);
